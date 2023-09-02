@@ -13,7 +13,9 @@
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="/public/images/favicon.png" type="image/x-icon">
     <!--====== Google Fonts ======-->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <!--====== Font Awesome ======-->
     <link rel="stylesheet" href="/public/css/fontawesome.5.9.0.min.css">
     <!--====== Flaticon CSS ======-->
@@ -47,7 +49,7 @@
 
 
         <!--====== Header Part Start ======-->
-        <header class="main-header header-two">
+        <header class="main-header header-two bg-primary">
             <!--Header-Upper-->
             <div class="header-upper">
                 <div class="container clearfix">
@@ -56,8 +58,14 @@
                             <!-- Main Menu -->
                             <nav class="main-menu navbar-expand-lg">
                                 <div class="navbar-header">
+                                    <div class="logo-mobile"><a href="/">
+                                            <h3 class="text-white">
+                                                Kazım CEYLAN
+                                            </h3>
+                                        </a></div>
                                     <!-- Toggle Button -->
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="main-menu">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                        data-target=".navbar-collapse" aria-controls="main-menu">
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
@@ -66,8 +74,8 @@
 
                                 <div class="navbar-collapse collapse clearfix" id="main-menu">
                                     <ul class="navigation clearfix">
-                                        <li><a href="contact.html">Anasayfa</a></li>
-                                                                                <li><a href="contact.html">Geliştiriciye Ulaş</a></li>
+                                        <li><a href="/">Anasayfa</a></li>
+                                        <li><a href="/">Geliştiriciye Ulaş</a></li>
                                     </ul>
                                 </div>
 
@@ -75,10 +83,17 @@
                             <!-- Main Menu End-->
                         </div>
 
+                        <div class="logo-outer mx-lg-auto">
+                            <div class="logo"><a href="/">
+                                    <h3 class="text-white">
+                                        Kazım CEYLAN
+                                    </h3>
+                                </a></div>
+                        </div>
+
                         <div class="menu-right d-none d-lg-flex align-items-center ml-lg-auto">
-                           <!-- Menu Serch Box-->
-                            
-                            <a href="contact.html" class="theme-btn style-five">Senaryo Oluştur <i class="fas fa-arrow-right"></i></a>
+                            <a href="/scenario" class="theme-btn style-five">Senaryo Oluştur <i
+                                    class="fas fa-arrow-right"></i></a>
                         </div>
 
                     </div>
@@ -90,7 +105,23 @@
         <!--====== Header Part End ======-->
 
         {{{body}}}
-        
+
+
+        <!--====== Footer Section Start ======-->
+        <footer class="footer-section rel z-1">
+            <div class="container">
+                <div class="copyright-area text-center">
+                    <p>© 2023 <a href="/">Kazım CEYLAN.</a> Tüm hakları saklıdır. @karadenizemirr Tarafından
+                        Geliştirilmiştir.</p>
+                </div>
+            </div>
+            <img class="dots-shape" src="/public/images/shapes/dots.png" alt="Shape">
+            <img class="tringle-shape" src="/public/images/shapes/tringle-two.png" alt="Shape">
+            <img class="circle-shape" src="/public/images/shapes/circle-two.png" alt="Shape">
+            <div class="left-circles"></div>
+            <div class="right-circles"></div>
+        </footer>
+        <!--====== Footer Section End ======-->
 
     </div>
     <!--End pagewrapper-->

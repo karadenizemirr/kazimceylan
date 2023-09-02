@@ -12,4 +12,12 @@ export class AppController {
       title: 'Anasayfa'
     }
   }
+
+  @Get('scenario')
+  @Render('scenario')
+  getScenario(){
+    return {
+      title: 'Senaryo Oluştur'
+    }
+  }
 }
