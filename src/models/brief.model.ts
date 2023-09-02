@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid4} from 'uuid';
 import { Hook } from "./hook.model";
+import { Scenario } from "./scenario.model";
 
 @Entity()
 export class Brief {
@@ -60,4 +61,7 @@ export class Brief {
 
     @OneToMany(() => Hook, (hook) => hook.brief, {cascade: true})
     hooks: Hook[]
+    
+    @OneToMany(() => Scenario, (scenario) => scenario.brief)
+    scenarios: Scenario[]
 }

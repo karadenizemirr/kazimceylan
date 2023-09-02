@@ -5,6 +5,7 @@ import { DataService } from "src/customService/data.service";
 import { AppDataSource } from "src/customService/mysql.service";
 import { Brief } from "src/models/brief.model";
 import { Hook } from "src/models/hook.model";
+import { Scenario } from "src/models/scenario.model";
 
 
 @Injectable()
@@ -14,6 +15,7 @@ export class AiService {
     private openai: OpenAI;
     private hookRepository:any
     private briefRepository:any
+    private scenarioRepository:any
 
     constructor(private configService: ConfigService, private dataService: DataService) {
         this.openApiKey = this.configService.get<string>('OPEN_API_KEY')
@@ -24,9 +26,10 @@ export class AiService {
 
         this.hookRepository = AppDataSource.getRepository(Hook)
         this.briefRepository = AppDataSource.getRepository(Brief)
+        this.scenarioRepository = AppDataSource.getRepository(Scenario)
     }
     
-    async createScenario(params: any): Promise<any> {
+    async createHooks(params: any, custom_prompt:string): Promise<any> {
         try{
             const gptPrompt = `
                 Şirket veya kişi ismi: ${params.company_name}
@@ -46,11 +49,7 @@ export class AiService {
                 Animasyon video yapılacak şirketin sektörü: ${params.company_sector}
                 Seslendirme türü: ${params.volume_type}
                 Metin yazı tonu: ${params.font}
-                Verdiğim bu bilgilere göre bir seslendirme metni yazmanı istiyorum.Herhangi bir kurgu ya da storyline istemiyorum.
-                Her animasyon seslendirme metninin başında, animasyon videonun sonuna kadar 
-                izletebilmesi ve dikkatleri çekebilmesi için dikkat çekici bir cümle kurulması gerekmektedir. Ortalama ilk 10-15 kelime dikkatleri çekebileceğimiz en önemli kelimelerdir.
-                Seslendirme metinleri resmi, espirili, kreatif olacak. Bunu yukarıda verdiğim metin yazı tonu kısmında belirttim. Senden istediğim 
-                birbirinden farklı 5 adet maksimum 15 kelimelik seslendirme cümleleri oluşturman.
+                ${custom_prompt}
             `
             const response = await this.openai.chat.completions.create(
                 {
@@ -110,6 +109,52 @@ export class AiService {
                 return response.choices
             }
             
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    async createScenario(params: any, custom_prompt:string): Promise<any> {
+        try{
+            const gptPrompt = `
+                Şirket veya kişi ismi: ${params.company_name}
+                Müşteri hizmet mi yoksa ürün mü satıyor?: ${params.product}
+                Çözüm getirilen sorun: ${params.product_description}
+                Somut ihtiyaç: ${params.concrete_need}
+                Soyut ihtiyaç: ${params.abstract_need}
+                Hizmet yada ürün özellikleri: ${params.product_properties}
+                Hizmet ya da ürün avantajları: ${params.product_advantages}
+                Vadedilen kazanımlar: ${params.gains}
+                Yönlendirme yapılacak yer: ${params.redirect}
+                Videoyu izleyenlerden beklenen davranış ve onları harekere geçirici söylem: ${params.behaviour}
+                Animasyonun süresi: ${params.animation_delay}
+                Yapılacak animasyon videosunun genel konu özeti: ${params.summary}
+                Hedef kitle: ${params.target_audience}
+                Hedef kitleye hitap dili: ${params.target_language}
+                Animasyon video yapılacak şirketin sektörü: ${params.company_sector}
+                Seslendirme türü: ${params.volume_type}
+                Metin yazı tonu: ${params.font}
+                ${custom_prompt}
+            `
+            const response = await this.openai.chat.completions.create(
+                {
+                    messages: [
+                        {
+                            role: 'user',
+                            content: gptPrompt
+                        }
+                    ],
+                    model: this.model,
+                    stop: ['\n'],
+                }
+            )
+            const text = response.choices[0].message.content
+            const scenario = new Scenario()
+            scenario.text = text.replace('"', '').replace('1.', '')
+            scenario.brief = params.id
+            await this.scenarioRepository.save(scenario)
+            
+            return response.choices
         }catch(err){
             console.log(err)
         }
@@ -215,6 +260,46 @@ export class AiService {
                 }
             }
             throw new HttpException('Hook not found', HttpStatus.NOT_FOUND)
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    async get_scenarios(){
+        try{
+
+            const scenarios = await this.scenarioRepository.find(
+                {
+                    relations: {
+                        brief: true
+                    }
+                }
+            )
+
+            return scenarios
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    async delete_scenario(id:string){
+        try{
+            const scenario = await this.scenarioRepository.findOne(
+                {
+                    where: {
+                        id: id
+                    }
+                }
+            )
+            if (scenario){
+                await this.scenarioRepository.delete(id)
+                return {
+                    message: 'Scenario deleted'
+                }
+            }
+            throw new HttpException('Scenario not found', HttpStatus.NOT_FOUND)
+
         }catch(err){
             console.log(err)
         }

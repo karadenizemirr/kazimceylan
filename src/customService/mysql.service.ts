@@ -1,5 +1,6 @@
 import { Brief } from "src/models/brief.model";
 import { Hook } from "src/models/hook.model";
+import { Scenario } from "src/models/scenario.model";
 import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({
@@ -11,7 +12,7 @@ export const AppDataSource = new DataSource({
     database: "kazimceylan",
     synchronize: true,
     logging: true,
-    entities: [Hook, Brief],
+    entities: [Hook, Brief, Scenario],
     subscribers: [],
     migrations: [],
 
