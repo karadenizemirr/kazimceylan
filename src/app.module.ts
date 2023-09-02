@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AiModule } from './ai/ai.module';
 import { ConfigModule } from '@nestjs/config';
 import { AiService } from './ai/ai.service';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { AiService } from './ai/ai.service';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    AiModule
+    AiModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService]

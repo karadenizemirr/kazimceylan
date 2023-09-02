@@ -1,0 +1,87 @@
+<!--====== Solutions Section Start ======-->
+<section class="solutions-section-two rel z-1 pt-130 rpt-100 pb-80 rpb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="/public/images/register-image.svg" alt="" class="image-fluid">
+            </div>
+            <div class="col-md-6 mt-auto mb-auto">
+                <div class="card border-white">
+                    <div class="card-title text-center">
+                        <h3>
+                            Kayıt Oluştur
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="register_form">
+                            <div class="row">
+                                <div class="col mb-4">
+                                    <input type="text" class="form-control" placeholder="Adınız" name="name">
+                                </div>
+                                <div class="col mb-4">
+                                    <input type="text" class="form-control" placeholder="Soyadınız" name="surname">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-4">
+                                    <input type="text" class="form-control" placeholder="Email Adresi" name="email">
+                                </div>
+                                <div class="col mb-4">
+                                    <input type="text" class="form-control" placeholder="Telefon Nu:"
+                                        name="phone_number">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-4">
+                                    <input type="password" class="form-control" placeholder="Şifre" name="password">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button class="btn btn-primary btn sm">
+                                        Kayıt Oluştur
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        $('#register_form').submit(function (e) {
+            e.preventDefault();
+            $('#register_form button').reset();
+            
+            var data = $(this).serialize();
+            $.ajax({
+                url: '/user/register',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Kayıt Başarı ile Oluşturuldu',
+                        text: response.message,
+                        confirmButtonText: 'Tamam'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/user/login';
+                        }
+                    })
+                },
+                error: function (response) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Kayıt Oluşturulamadı',
+                        confirmButtonText: 'Tamam'
+                    })
+                }
+            })
+        })
+    })
+</script>
