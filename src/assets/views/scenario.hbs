@@ -8,87 +8,112 @@
                 </h3>
             </div>
             <div class="card-body">
-                <form action="">
+                <form id="scenario_form">
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Şirket & Şahıs İsmi">
+                            <input type="text" class="form-control" placeholder="Şirket & Şahıs İsmi"
+                                name="company_name" autocomplete="off" value="{{briefs.company_name}}">
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Hizmet & Ürün">
+                            <input type="text" class="form-control" placeholder="Hizmet & Ürün" name="product"
+                                autocomplete="off" value="{{briefs.product}}" >
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Çözüm Getiren Sorun">
+                            <input type="text" class="form-control" placeholder="Çözüm Getiren Sorun"
+                                name="product_description" autocomplete="off" value="{{briefs.product_description}}" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Somut İhtiyaç">
+                            <input type="text" class="form-control" placeholder="Somut İhtiyaç" name="concrete_need"
+                                autocomplete="off" value="{{briefs.concrete_need}}" >
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Soyut İhtiyaç">
+                            <input type="text" class="form-control" placeholder="Soyut İhtiyaç" name="abstract_need"
+                                autocomplete="off" value="{{briefs.abstract_need}}" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <textarea class="form-control" id="" cols="30" rows="10"
-                                placeholder="Ürün & Hizmet Özellikleri"></textarea>
+                                placeholder="Ürün & Hizmet Özellikleri" name="product_properties">{{briefs.product_properties}}</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <textarea class="form-control" name="" id="" cols="10" rows="5"
-                                placeholder="Ürün & Himzet Avantajları"></textarea>
+                            <textarea class="form-control" cols="10" rows="5" placeholder="Ürün & Himzet Avantajları"
+                                name="product_advantage">{{briefs.product_advantage}}</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Vadedilen Kazanımlar">
+                            <input type="text" class="form-control" placeholder="Vadedilen Kazanımlar" name="gains"
+                                autocomplete="off" value="{{briefs.gain}}" >
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Yönlendirme Linki">
+                            <input type="text" class="form-control" placeholder="Yönlendirme Linki" name="redirect_url"
+                                autocomplete="off" value="{{briefs.redirect_url}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <input type="text" class="form-control"
-                                placeholder="Videoyu izleyenlerden beklenen davranış">
+                                placeholder="Videoyu izleyenlerden beklenen davranış" name="behaviour"
+                                autocomplete="off" value="{{briefs.behaviour}}" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Animasyon Süresi">
+                            <input type="text" class="form-control" placeholder="Animasyon Süresi"
+                                name="animation_delay" autocomplete="off" value="{{briefs.animation_delay}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <textarea class="form-control" id="" cols="5" rows="4"
-                                placeholder="Genel Konu Özeti"></textarea>
+                            <textarea class="form-control" id="" cols="5" rows="4" placeholder="Genel Konu Özeti"
+                                name="summary">{{briefs.summary}}</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Hedef Kitle">
+                            <input type="text" class="form-control" placeholder="Hedef Kitle" name="target_group"
+                                autocomplete="off" value="{{briefs.target_group}}" >
                         </div>
                         <div class="col-mb-3">
-                            <input type="text" class="form-control" placeholder="Hedef Kitleye Hitap Dili">
+                            <input type="text" class="form-control" placeholder="Hedef Kitleye Hitap Dili"
+                                name="target_language" autocomplete="off" value="{{briefs.target_language}}">
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Şirketin Sektörü">
+                            <input type="text" class="form-control" placeholder="Şirketin Sektörü" name="company_sector"
+                                autocomplete="off" value="{{briefs.company_sector}}" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Seslendirme Türü">
+                            <input type="text" class="form-control" placeholder="Seslendirme Türü" name="volume_type"
+                                autocomplete="off" value="{{briefs.valume_type}}" >
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Yazı Tonu">
+                            <input type="text" class="form-control" placeholder="Yazı Tonu" name="font"
+                                autocomplete="off" value="{{briefs.font}}" >
                         </div>
                     </div>
+                    <input type="text" hidden value="{{briefs.id}}" id="id">
                     <div class="row">
                         <div class="col">
-                            <button class="btn btn-primary w-100">
-                                Senaryo Oluştur
+                            <button class="btn btn-success w-100">
+                                Kanca Cümleler Oluştur
                             </button>
+                        </div>
+                        <div class="col">
+                            <a id="create_scenario_button" class="btn btn-primary w-100">
+                                Senaryo Oluştur
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a id="update_scenario_button" class="btn btn-warning w-100">
+                                Güncelle
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -97,3 +122,67 @@
     </div>
 </section>
 <!--====== Solutions Section End ======-->
+
+<!-- Modal -->
+<div class="modal fade" id="result_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Oluşturulan Anahtar Kelimeler</h5>
+                <button type="button" class="close" id="close_modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul id="keyword_list"></ul>
+            </div>
+            <div class="modal-footer">
+                <p class="text-danger text-sm">
+                    Veriler otomatik olarak kayıt edilecektir.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#scenario_form").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/scenario/create",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function (response) {
+                    for (const data of response) {
+                        var liElement = $('<li>').text(data.message.content)
+                        $('#keyword_list').append(liElement)
+                        $('#result_modal').modal('show')
+                        $('#scenario_form').trigger("reset");
+                    }
+                }
+            })
+        })
+
+        $('#update_scenario_button').on('click', function(){
+            var form_data = $('#scenario_form').serialize();
+            var id = $('#id').val()
+            $.ajax({
+                url:'/scenario/briefs/update/' + id,
+                type:'POST',
+                data:form_data,
+                success:function(response){
+                    window.location.reload()
+                }
+            })
+        })
+
+        $('#create_scenario_button').on('click', function(){
+            var form_data = $('#scenario_form').serializeArray();
+        })
+    })
+    $('#close_modal').click(function () {
+        $('#keyword_list').empty()
+        $('#result_modal').modal('hide')
+    })
+</script>

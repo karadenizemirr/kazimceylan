@@ -1,0 +1,36 @@
+<!--====== Solutions Section Start ======-->
+<section class="solutions-section-two rel z-1 pt-130 rpt-100 pb-80 rpb-50">
+  <div class="container">
+    <div class="page-title mt-4 mb-4 text-center">
+      <h2>
+        Briefs
+      </h2>
+    </div>
+    <table class="table">
+      <thead class="text-center">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Cümle</th>
+          <th scope="col">Şirket İsmi</th>
+          <th scope="col">İşlem</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        {{#each hooks}}
+                <tr>
+          <th scope="row">{{this.id}}</th>
+          <td>
+            {{this.text}}
+          </td>
+          <td>
+            {{this.brief.company_name}}
+          </td>
+          <td>
+            <a href="/scenario/hooks/delete/{{this.id}}" class="btn btn-danger btn-sm">Sil</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>
