@@ -1,0 +1,73 @@
+<!--====== Solutions Section Start ======-->
+<section class="solutions-section-two rel z-1 pt-130 rpt-100 pb-80 rpb-50">
+    <div class="container">
+        <div class="page-title text-center">
+            <h2>
+                Site Ayarları
+            </h2>
+        </div>
+
+        <div class="content settingsContent border p-3 ml-auto mr-auto" style="width: 70%;">
+            <table class="table">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">Open AI Api Key</th>
+                        <th scope="col">Model Adı</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <form id="settings_form">
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Api Key" name="openai_api_key" value="{{settings.openai_api_key}}">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" placeholder="Model Adı" name="openapi_model" value="{{settings.openapi_model}}" >
+                            </td>
+                            <input type="text" hidden value="{{settings.id}}" name="id">
+                            <td>
+                                <button class="btn btn-success btn-sm">Değişiklikleri Kaydet</button>
+                            </td>
+                        </tr>
+                    </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+        $('#settings_form').submit(function(e){
+            e.preventDefault()
+            let data = $(this).serialize()
+
+            $.ajax({
+                url: '/settings/addOrUpdate',
+                type: 'POST',
+                data: data,
+                success: function(response){
+                    if(response == 200){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Başarılı',
+                            text: response.message,
+                            showConfirmButton: false,
+                            setTimeout: 1000
+                        })
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Hata',
+                            text: response.message,
+                            showConfirmButton: false,
+                            setTimeout: 1000
+                        })
+                    }
+                }
+            })
+
+        })
+    })
+</script>

@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import {OpenAI } from "openai";
-import { DataService } from "src/customService/data.service";
 import { AppDataSource } from "src/customService/mysql.service";
 import { Brief } from "src/models/brief.model";
 import { Hook } from "src/models/hook.model";
@@ -17,7 +16,8 @@ export class AiService {
     private briefRepository:any
     private scenarioRepository:any
 
-    constructor(private configService: ConfigService, private dataService: DataService) {
+    constructor(private configService: ConfigService) {
+
         this.openApiKey = this.configService.get<string>('OPEN_API_KEY')
         this.model = this.configService.get<string>('MODEL')
         this.openai = new OpenAI({

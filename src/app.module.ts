@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { JwtService } from './customService/jwt.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthInterceptors } from './auth/auth.interceptors';
+import { SettingsModule } from './settings/settings.module';
 
 @Global()
 @Module({
@@ -17,7 +18,8 @@ import { AuthInterceptors } from './auth/auth.interceptors';
       isGlobal: true,
     }),
     AiModule,
-    UserModule
+    UserModule,
+    SettingsModule
   ],
   controllers: [AppController],
   providers: [

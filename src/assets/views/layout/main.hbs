@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!--====== Title ======-->
-    <title>{{title}} - Kazım CEYLAN</title>
+    <title>{{title}} - Vidyoner</title>
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="/public/images/favicon.png" type="image/x-icon">
     <!--====== Google Fonts ======-->
@@ -61,8 +61,8 @@
                             <!-- Main Menu -->
                             <nav class="main-menu navbar-expand-lg">
                                 <div class="navbar-header">
-                                    <div class="logo-mobile"><a href="/"><img src="/public/images/logo.png"
-                                                alt="Logo" style="max-width: 200px;"></a></div>
+                                    <div class="logo-mobile"><a href="/"><img src="/public/images/logo.png" alt="Logo"
+                                                style="max-width: 200px;"></a></div>
                                     <!-- Toggle Button -->
                                     <button type="button" class="navbar-toggle" data-toggle="collapse"
                                         data-target=".navbar-collapse" aria-controls="main-menu">
@@ -76,9 +76,18 @@
                                     <ul class="navigation clearfix">
                                         <li><a href="/">Anasayfa</a></li>
                                         {{#if isLogin}}
-                                        <li><a href="/scenario/briefs">Briefs</a></li>
-                                        <li><a href="/scenario/hooks">Cümleler</a></li>
-                                        <li><a href="/scenario/all">Senaryolar</a></li>
+                                        <li class="dropdown"><a href="#">Senaryo İşlemleri</a>
+                                            <ul>
+                                                <li><a href="/scenario/briefs">Briefs</a></li>
+                                                <li><a href="/scenario/hooks">Cümleler</a></li>
+                                                <li><a href="/scenario/all">Senaryolar</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown"><a href="#">Ayarlar</a>
+                                            <ul>
+                                                <li><a href="/settings">Site Ayarları</a></li>
+                                            </ul>
+                                        </li>
                                         {{/if}}
                                         <li><a href="/">Geliştiriciye Ulaş</a></li>
                                     </ul>
@@ -166,8 +175,6 @@
     <script src="/public/js/script.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
-
-
 </body>
 
 </html>
