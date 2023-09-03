@@ -35,8 +35,11 @@ export class SettingsService {
                 return update
             }else {
                 // add
-                const add = await this.settingsRepository.save(data)
-                return add
+                const settings = new Settings()
+                settings.openai_api_key = data.openai_api_key
+                settings.openapi_model = data.openapi_model
+                await this.settingsRepository.save(settings)
+                return settings
             }
 
         }catch(err){

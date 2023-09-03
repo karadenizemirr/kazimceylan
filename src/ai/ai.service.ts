@@ -18,7 +18,7 @@ export class AiService {
 
     constructor(private configService: ConfigService) {
 
-        this.openApiKey = "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"
+        this.openApiKey = this.configService.get<string>('OPEN_API_KEY')
         this.model = this.configService.get<string>('MODEL')
         this.openai = new OpenAI({
             apiKey: this.openApiKey,
