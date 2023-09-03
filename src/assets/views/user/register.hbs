@@ -55,8 +55,6 @@
     $(document).ready(function () {
         $('#register_form').submit(function (e) {
             e.preventDefault();
-            $('#register_form button').reset();
-            
             var data = $(this).serialize();
             $.ajax({
                 url: '/user/register',

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid4} from 'uuid';
 import { Hook } from "./hook.model";
 import { Brief } from "./brief.model";
@@ -11,6 +11,9 @@ export class Scenario {
     @Column({length: 9999})
     text:string
 
-    @ManyToOne(() => Brief, (brief) => brief.scenarios)
+    @CreateDateColumn()
+    created_at: Date
+
+    @ManyToOne(() => Brief, (brief) => brief.scenarios, {nullable: true})
     brief: Brief
 }

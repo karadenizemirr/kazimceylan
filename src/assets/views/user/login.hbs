@@ -15,10 +15,10 @@
                     <div class="card-body">
                         <form id="register_form">
                             <div class="form-group mb-4">
-                                <input type="text" class="form-control" placeholder="Kullanıcı Adı">
+                                <input type="text" class="form-control" placeholder="Kullanıcı Adı" name="email">
                             </div>
                             <div class="form-group mb-4">
-                                <input type="text" class="form-control" placeholder="Şifre">
+                                <input type="password" class="form-control" placeholder="Şifre" name="password">
                             </div>
                             <div class="form-group mb-4 text-center">
                                 <button class="btn btn-primary">
@@ -32,3 +32,45 @@
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(function () {
+        $('#register_form').submit(function (e) {
+            e.preventDefault()
+            var data = $(this).serialize()
+
+            $.ajax({
+                url: '/user/login',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    if (response === 200) {
+                        Swal.fire({
+                            title: 'Giriş İşlemi',
+                            text: 'Giriş işlemi başarılı bir şekilde gerçekleştirildi.',
+                            icon: 'success',
+                        }).then((result) => {
+                            if (result.value) {
+                                window.location.href = '/'; // Anasayfaya yönlendirme
+                            }
+                        });
+                    }else {
+                                            Swal.fire({
+                        title: 'Giriş İşlemi',
+                        text: 'Giriş işlemi başarısız oldu.',
+                        icon: 'error',
+                    })
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        title: 'Giriş İşlemi',
+                        text: 'Giriş işlemi başarısız oldu.',
+                        icon: 'error',
+                    })
+                }
+            })
+
+        })
+    })
+</script>

@@ -5,7 +5,11 @@ import { AiModule } from './ai/ai.module';
 import { ConfigModule } from '@nestjs/config';
 import { AiService } from './ai/ai.service';
 import { UserModule } from './user/user.module';
+import { JwtService } from './customService/jwt.service';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { AuthInterceptors } from './auth/auth.interceptors';
 
+@Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -16,6 +20,15 @@ import { UserModule } from './user/user.module';
     UserModule
   ],
   controllers: [AppController],
-  providers: [AppService]
+  providers: [
+    AppService,
+    JwtService,
+    {
+      provide:APP_INTERCEPTOR,
+      useClass: AuthInterceptors
+    }
+  
+  ],
+  exports:[JwtService]
 })
 export class AppModule {}

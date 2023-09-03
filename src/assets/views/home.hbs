@@ -8,9 +8,14 @@
                     <span class="sub-title wow fadeInUp delay-0-2s">Kazım CEYLAN</span>
                     <h1 class="mb-15 wow fadeInUp delay-0-4s">Senaryolarınızı Kolayca Oluşturun</h1>
                     <div class="hero-btns mt-40 wow fadeInUp delay-0-8s">
-                        <a href="contact.html" class="theme-btn style-four">Senaryo Oluştur <i
+                        {{#if isLogin}}
+                        <a href="/scenario" class="theme-btn style-four">Senaryo Oluştur <i
                                 class="fas fa-arrow-right"></i></a>
-                        <a href="about.html" class="theme-btn style-five">Geliştiriciye Ulaş <i
+                        {{else}}
+                        <a href="/user/login" class="theme-btn style-four">Giriş Yap <i
+                                class="fas fa-arrow-right"></i></a>
+                        {{/if}}
+                        <a href="/" class="theme-btn style-five">Geliştiriciye Ulaş <i
                                 class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>

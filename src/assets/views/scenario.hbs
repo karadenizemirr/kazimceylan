@@ -11,107 +11,119 @@
                 <form id="scenario_form">
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Şirket & Şahıs İsmi"
-                                name="company_name" autocomplete="off" value="{{briefs.company_name}}">
+                            <input type="text" class="form-input" placeholder="Şirket & Şahıs İsmi" name="company_name"
+                                autocomplete="off" value="{{briefs.company_name}}">
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Hizmet & Ürün" name="product"
-                                autocomplete="off" value="{{briefs.product}}" >
+                            <input type="text" class="form-input" placeholder="Hizmet & Ürün" name="product"
+                                autocomplete="off" value="{{briefs.product}}">
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Çözüm Getiren Sorun"
-                                name="product_description" autocomplete="off" value="{{briefs.product_description}}" >
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Somut İhtiyaç" name="concrete_need"
-                                autocomplete="off" value="{{briefs.concrete_need}}" >
-                        </div>
-                        <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Soyut İhtiyaç" name="abstract_need"
-                                autocomplete="off" value="{{briefs.abstract_need}}" >
+                            <input type="text" class="form-input" placeholder="Çözüm Getiren Sorun"
+                                name="product_description" autocomplete="off" value="{{briefs.product_description}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <textarea class="form-control" id="" cols="30" rows="10"
-                                placeholder="Ürün & Hizmet Özellikleri" name="product_properties">{{briefs.product_properties}}</textarea>
+                            <input type="text" class="form-input" placeholder="Somut İhtiyaç" name="concrete_need"
+                                autocomplete="off" value="{{briefs.concrete_need}}">
+                        </div>
+                        <div class="col mb-3">
+                            <input type="text" class="form-input" placeholder="Soyut İhtiyaç" name="abstract_need"
+                                autocomplete="off" value="{{briefs.abstract_need}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <textarea class="form-control" cols="10" rows="5" placeholder="Ürün & Himzet Avantajları"
+                            <textarea class="form-input" id="" cols="30" rows="10"
+                                placeholder="Ürün & Hizmet Özellikleri"
+                                name="product_properties">{{briefs.product_properties}}</textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <textarea class="form-input" cols="10" rows="5" placeholder="Ürün & Himzet Avantajları"
                                 name="product_advantage">{{briefs.product_advantage}}</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Vadedilen Kazanımlar" name="gains"
-                                autocomplete="off" value="{{briefs.gain}}" >
+                            <input type="text" class="form-input" placeholder="Vadedilen Kazanımlar" name="gains"
+                                autocomplete="off" value="{{briefs.gain}}">
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Yönlendirme Linki" name="redirect_url"
+                            <input type="text" class="form-input" placeholder="Yönlendirme Yapılacak Yer" name="redirect_url"
                                 autocomplete="off" value="{{briefs.redirect_url}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control"
-                                placeholder="Videoyu izleyenlerden beklenen davranış" name="behaviour"
-                                autocomplete="off" value="{{briefs.behaviour}}" >
+                            <input type="text" class="form-input" placeholder="Videoyu izleyenlerden beklenen davranış"
+                                name="behaviour" autocomplete="off" value="{{briefs.behaviour}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Animasyon Süresi"
-                                name="animation_delay" autocomplete="off" value="{{briefs.animation_delay}}">
+                            <input type="text" class="form-input" placeholder="Animasyon Süresi" name="animation_delay"
+                                autocomplete="off" value="{{briefs.animation_delay}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <textarea class="form-control" id="" cols="5" rows="4" placeholder="Genel Konu Özeti"
+                            <textarea class="form-input" id="" cols="5" rows="4" placeholder="Genel Konu Özeti"
                                 name="summary">{{briefs.summary}}</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Hedef Kitle" name="target_group"
-                                autocomplete="off" value="{{briefs.target_group}}" >
+                            <input type="text" class="form-input" placeholder="Hedef Kitle" name="target_group"
+                                autocomplete="off" value="{{briefs.target_group}}">
                         </div>
                         <div class="col-mb-3">
-                            <input type="text" class="form-control" placeholder="Hedef Kitleye Hitap Dili"
-                                name="target_language" autocomplete="off" value="{{briefs.target_language}}">
+                                <select name="target_language" id="" class="form-select">
+                                    <option>Hikaye Hitap Dili</option>
+                                    <option value="sen dili">Sen Dili</option>
+                                    <option value="siz dili">Siz Dili</option>
+                                </select>
                         </div>
                         <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Şirketin Sektörü" name="company_sector"
-                                autocomplete="off" value="{{briefs.company_sector}}" >
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Seslendirme Türü" name="volume_type"
-                                autocomplete="off" value="{{briefs.valume_type}}" >
-                        </div>
-                        <div class="col mb-3">
-                            <input type="text" class="form-control" placeholder="Yazı Tonu" name="font"
-                                autocomplete="off" value="{{briefs.font}}" >
+                            <input type="text" class="form-input" placeholder="Şirketin Sektörü" name="company_sector"
+                                autocomplete="off" value="{{briefs.company_sector}}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <select name="" class="form-control" id="">
-                                <option value="">55 -60</option>
-                                <option value="">85- 90</option>
-                                <option value="">110 - 115</option>
-                                <option value="">170 - 175</option>
+                            <select class="form-select" aria-label="Default select example">
+                                <option>Oluşturulacak Metnin Kelime Sayısı</option>
+                                <option value="55-60">55 -60</option>
+                                <option value="85-90">85- 90</option>
+                                <option value="110-115">110 - 115</option>
+                                <option value="170-175">170 - 175</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                                <select name="volume_type" id="" class="form-select">
+                                    <option>Seslendirme Türü</option>
+                                    <option value="doğrudan anlatım">Doğrudan Anlatım</option>
+                                    <option value="hikaye anlatıcılığı">Hikaye Anlatıcılığı</option>
+                                </select>
+
+                        </div>
+                        <div class="col mb-3">
+                                <select name="font" id="" class="form-select">
+                                    <option>Metin Yazı Tonu</option>
+                                    <option value="kreatif">Kreatif</option>
+                                    <option value="klasik ton">Klasik Ton</option>
+                                    <option value="agresif">Agresif</option>
+                                </select>
                         </div>
                     </div>
                     <input type="text" hidden value="{{briefs.id}}" id="id" name="id">
                     <div class="row">
                         <div class="col">
-                            <button class="btn btn-success w-100">
+                            <button type="submit" class="btn btn-success w-100" id="create_hook_button" >
                                 Kanca Cümleler Oluştur
                             </button>
                         </div>
@@ -168,7 +180,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <input type="text" class="form-control" placeholder="Kanca Cümle" id="hook_centence">
+                <input type="text" class="form-input" placeholder="Kanca Cümle" id="hook_centence">
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary btn-sm" id="send_create_scenario_button">Senaryo Oluştur</button>
@@ -183,7 +195,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content text-center">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Oluşturulan Anahtar Kelimeler</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Oluşturulan Senaryo</h5>
                 <button type="button" class="close" id="close_modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -202,6 +214,11 @@
     $(document).ready(function () {
         $("#scenario_form").submit(function (e) {
             e.preventDefault();
+                var button = $(this).find('button[type="submit"]');
+                // Butonun içeriğini spinner ile değiştir
+                button.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Yükleniyor...');
+                // Butonu devre dışı bırak
+                button.prop('disabled', true);
             $.ajax({
                 url: "/scenario/create",
                 type: "POST",
@@ -213,43 +230,53 @@
                         $('#result_modal').modal('show')
                         $('#scenario_form').trigger("reset");
                     }
+                },
+                complete: function(){
+                    button.html('Gönder');
+                    // Butonu etkinleştir
+                    button.prop('disabled', false);
                 }
             })
         })
 
-        $('#update_scenario_button').on('click', function(){
+        $('#update_scenario_button').on('click', function () {
             var form_data = $('#scenario_form').serialize();
             var id = $('#id').val()
             $.ajax({
-                url:'/scenario/briefs/update/' + id,
-                type:'POST',
-                data:form_data,
-                success:function(response){
+                url: '/scenario/briefs/update/' + id,
+                type: 'POST',
+                data: form_data,
+                success: function (response) {
                     window.location.reload()
                 }
             })
         })
 
-        $('#create_scenario_button').on('click', function(){
+        $('#create_scenario_button').on('click', function () {
             var form_data = $('#scenario_form').serializeArray();
             $('#create_centence_modal').modal('show')
 
-            $('#send_create_scenario_button').on('click', function(){
+            $('#send_create_scenario_button').on('click', function () {
+                $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Yükleniyor...');
                 var hooks_centes = $('#hook_centence').val()
-                form_data.push({name:'hooks_centes', value:hooks_centes})
+                form_data.push({ name: 'hooks_centes', value: hooks_centes })
                 $.ajax({
-                    url:'/scenario/add',
-                    type:'POST',
-                    data:form_data,
-                    success:function(response){
+                    url: '/scenario/add',
+                    type: 'POST',
+                    data: form_data,
+                    success: function (response) {
                         $('#scenario_modal').modal('show')
                         $('#create_centence_modal').modal('hide')
                         var p = $('<p>').text(response[0].message.content)
                         $('#scenario_content').append(p)
+                    },
+                    complete: function(){
+                        $(this).html('Senaryo Oluştur');
+                        $(this).prop('disabled', false);
                     }
                 })
             })
-            
+
         })
     })
     $('#close_modal').click(function () {

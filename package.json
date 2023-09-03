@@ -20,6 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@fastify/secure-session": "^7.0.0",
     "@fastify/static": "^6.11.0",
     "@fastify/view": "^8.0.0",
     "@nestjs/cli": "^10.0.0",
@@ -30,7 +31,9 @@
     "@nestjs/platform-fastify": "^10.2.4",
     "bcrpyt": "^2.0.0",
     "bcrypt": "^5.1.1",
+    "fastify-secure-session": "^3.2.0",
     "handlebars": "^4.7.8",
+    "jsonwebtoken": "^9.0.2",
     "mammoth": "^1.6.0",
     "mysql": "^2.18.1",
     "openai": "^4.4.0",
@@ -47,6 +50,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.2",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^20.3.1",
     "@types/supertest": "^2.0.12",
     "@types/uuid": "^9.0.3",

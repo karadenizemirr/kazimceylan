@@ -61,11 +61,8 @@
                             <!-- Main Menu -->
                             <nav class="main-menu navbar-expand-lg">
                                 <div class="navbar-header">
-                                    <div class="logo-mobile"><a href="/">
-                                            <h3 class="text-white">
-                                                Kazım CEYLAN
-                                            </h3>
-                                        </a></div>
+                                    <div class="logo-mobile"><a href="/"><img src="/public/images/logo.png"
+                                                alt="Logo" style="max-width: 200px;"></a></div>
                                     <!-- Toggle Button -->
                                     <button type="button" class="navbar-toggle" data-toggle="collapse"
                                         data-target=".navbar-collapse" aria-controls="main-menu">
@@ -78,9 +75,11 @@
                                 <div class="navbar-collapse collapse clearfix" id="main-menu">
                                     <ul class="navigation clearfix">
                                         <li><a href="/">Anasayfa</a></li>
+                                        {{#if isLogin}}
                                         <li><a href="/scenario/briefs">Briefs</a></li>
                                         <li><a href="/scenario/hooks">Cümleler</a></li>
                                         <li><a href="/scenario/all">Senaryolar</a></li>
+                                        {{/if}}
                                         <li><a href="/">Geliştiriciye Ulaş</a></li>
                                     </ul>
                                 </div>
@@ -89,18 +88,25 @@
                             <!-- Main Menu End-->
                         </div>
 
-                        <div class="logo-outer mx-lg-auto">
+                        <div class="logo-outer mx-lg-auto ">
                             <div class="logo"><a href="/">
-                                    <h3 class="text-white">
-                                        Kazım CEYLAN
-                                    </h3>
+                                    <img src="/public/images/logo.png" alt="Logo" style="max-width: 200px;">
                                 </a></div>
                         </div>
 
+                        {{#if isLogin}}
                         <div class="menu-right d-none d-lg-flex align-items-center ml-lg-auto">
                             <a href="/scenario" class="theme-btn style-five">Senaryo Oluştur <i
                                     class="fas fa-arrow-right"></i></a>
+                            <a href="/user/logout" class="theme-btn style-five ml-2">Çıkış Yap <i
+                                    class="fas fa-sign-out-alt"></i></a>
                         </div>
+                        {{else}}
+                        <div class="menu-right d-none d-lg-flex align-items-center ml-lg-auto">
+                            <a href="/user/login" class="theme-btn style-five">Giriş Yap <i
+                                    class="fas fa-sign-in-alt"></i></a>
+                        </div>
+                        {{/if}}
 
                     </div>
                 </div>
@@ -158,7 +164,7 @@
     <script src="/public/js/slick.min.js"></script>
     <!--====== Main JS ======-->
     <script src="/public/js/script.js"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 
 

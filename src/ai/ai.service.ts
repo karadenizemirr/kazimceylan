@@ -89,12 +89,13 @@ export class AiService {
                 brief.company_sector = params.company_sector
                 brief.volume_type = params.volume_type
                 brief.font = params.font
-                brief.hooks = hooks
+                
                 
                 if (params.id){
                     brief.id = params.id
                     await this.briefRepository.update(params.id, brief)
                 }else {
+                    brief.hooks = hooks
                     await this.briefRepository.save(brief)
                 }
 
@@ -162,7 +163,7 @@ export class AiService {
 
     async get_briefs(): Promise<any> {
         try{
-            const briefs = await this.briefRepository.find({relations: ['hooks']})
+            const briefs = await this.briefRepository.find({relations: ['hooks'], order: {created_at: 'DESC'}})
             return briefs
         }catch(err){
             console.log(err)
@@ -235,6 +236,9 @@ export class AiService {
                 {
                     relations: {
                         brief: true
+                    },
+                    order:{
+                        created_at: 'DESC'
                     }
                 }
             )
@@ -272,6 +276,9 @@ export class AiService {
                 {
                     relations: {
                         brief: true
+                    },
+                    order: {
+                        created_at: 'DESC'
                     }
                 }
             )

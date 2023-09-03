@@ -17,7 +17,8 @@
         {{#each scenarios}}
                 <tr>
           <td>
-            {{this.text}}
+              <a href="#" class="scenario-link">{{text_resize this.text}}</a>
+              <input type="text" hidden id="scenario_detai" value="{{this.text}}">
           </td>
           <td>
             <a href="/scenario/{{this.brief.id}}" class="text-primary">{{this.brief.company_name}}</a>
@@ -28,3 +29,30 @@
     </table>
   </div>
 </section>
+
+<!-- Modal -->
+<div class="modal" id="scenarioModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Scenario Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $('.scenario-link').on('click', function(e) {
+      e.preventDefault();
+      var text = $(this).next('#scenario_detai').val();
+      $('#scenarioModal .modal-body p').text(text);
+      $('#scenarioModal').modal('show');
+    });
+  })
+</script>

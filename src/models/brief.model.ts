@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid4} from 'uuid';
 import { Hook } from "./hook.model";
 import { Scenario } from "./scenario.model";
@@ -59,7 +59,10 @@ export class Brief {
     @Column({nullable: true})
     font: string
 
-    @OneToMany(() => Hook, (hook) => hook.brief, {cascade: true})
+    @CreateDateColumn()
+    created_at: Date
+
+    @OneToMany(() => Hook, (hook) => hook.brief)
     hooks: Hook[]
     
     @OneToMany(() => Scenario, (scenario) => scenario.brief)
