@@ -9,6 +9,7 @@ import { JwtService } from './customService/jwt.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthInterceptors } from './auth/auth.interceptors';
 import { SettingsModule } from './settings/settings.module';
+import { SettingsService } from './settings/settings.service';
 
 @Global()
 @Module({
@@ -25,12 +26,14 @@ import { SettingsModule } from './settings/settings.module';
   providers: [
     AppService,
     JwtService,
+    SettingsService,
     {
       provide:APP_INTERCEPTOR,
       useClass: AuthInterceptors
     }
   
   ],
-  exports:[JwtService]
+
+  exports:[JwtService, SettingsService]
 })
 export class AppModule {}

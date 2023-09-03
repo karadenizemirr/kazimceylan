@@ -5,6 +5,7 @@ import { AppDataSource } from "src/customService/mysql.service";
 import { Brief } from "src/models/brief.model";
 import { Hook } from "src/models/hook.model";
 import { Scenario } from "src/models/scenario.model";
+import { SettingsService } from "src/settings/settings.service";
 
 
 @Injectable()
@@ -16,20 +17,24 @@ export class AiService {
     private briefRepository:any
     private scenarioRepository:any
 
-    constructor(private configService: ConfigService) {
-
-        this.openApiKey = this.configService.get<string>('OPEN_API_KEY')
-        this.model = this.configService.get<string>('MODEL')
-        this.openai = new OpenAI({
-            apiKey: this.openApiKey,
-        });
-
+    constructor(private configService: ConfigService, private settingsService:SettingsService) {
+        this.initializeRepository()
+    }
+    private async initializeRepository(){
         this.hookRepository = AppDataSource.getRepository(Hook)
         this.briefRepository = AppDataSource.getRepository(Brief)
         this.scenarioRepository = AppDataSource.getRepository(Scenario)
     }
-    
+
     async createHooks(params: any, custom_prompt:string): Promise<any> {
+        const settings_data = await this.settingsService.get_custom_settings()
+        this.model = settings_data.openapi_model
+        this.openApiKey = settings_data.openai_api_key
+        
+        this.openai = new OpenAI({
+            apiKey: this.openApiKey,
+        });
+
         try{
             const gptPrompt = `
                 Şirket veya kişi ismi: ${params.company_name}
@@ -116,6 +121,13 @@ export class AiService {
     }
 
     async createScenario(params: any, custom_prompt:string): Promise<any> {
+        const settings_data = await this.settingsService.get_custom_settings()
+        this.model = settings_data.openapi_model
+        this.openApiKey = settings_data.openai_api_key
+        
+        this.openai = new OpenAI({
+            apiKey: this.openApiKey,
+        });
         try{
             const gptPrompt = `
                 Şirket veya kişi ismi: ${params.company_name}

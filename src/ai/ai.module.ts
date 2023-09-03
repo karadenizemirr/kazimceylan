@@ -6,6 +6,6 @@ import { SettingsService } from "src/settings/settings.service";
 
 @Module({
     controllers: [AiController],
-    providers: [AiService, DataService, SettingsService],
+    providers: [AiService, DataService],
 })
 export class AiModule {}
