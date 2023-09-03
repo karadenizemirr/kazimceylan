@@ -18,13 +18,12 @@ export class UserService {
             const control = await this.userRepository.findOne(
                 {
                     where: {
-                        email: data.email,
-                        phone_number: data.phone_number
+                        email: data.email
                     }
                 }
             )
 
-            if (control){
+            if (!control){
                 const user = new User()
                 user.name = data.name
                 user.surname = data.surname

@@ -17,5 +17,4 @@ export const AppDataSource = new DataSource({
     entities: [Hook, Brief, Scenario, User,Settings],
     subscribers: [],
     migrations: [],
-
 })
