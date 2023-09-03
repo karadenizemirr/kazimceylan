@@ -59,6 +59,9 @@ export class Brief {
     @Column({nullable: true})
     font: string
 
+    @Column({nullable: true})
+    text_lenght: string
+    
     @CreateDateColumn()
     created_at: Date
 

@@ -33,12 +33,11 @@ async function bootstrap() {
     return text
   })
 
-  Handlebars.registerHelper('eq', function(a, b, options){
+  Handlebars.registerHelper('selectOption', function(a,b){
     if (a == b){
-      return options.fn(this)
-    }else {
-      return false
+      return 'selected'
     }
+    return ''
   })
 
   await app.register(secureSession, {

@@ -10,6 +10,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthInterceptors } from './auth/auth.interceptors';
 import { SettingsModule } from './settings/settings.module';
 import { SettingsService } from './settings/settings.service';
+import { ChatgptService } from './customService/chatgpt.service';
 
 @Global()
 @Module({
@@ -27,6 +28,7 @@ import { SettingsService } from './settings/settings.service';
     AppService,
     JwtService,
     SettingsService,
+    ChatgptService,
     {
       provide:APP_INTERCEPTOR,
       useClass: AuthInterceptors
@@ -34,6 +36,6 @@ import { SettingsService } from './settings/settings.service';
   
   ],
 
-  exports:[JwtService, SettingsService]
+  exports:[JwtService, SettingsService, ChatgptService]
 })
 export class AppModule {}

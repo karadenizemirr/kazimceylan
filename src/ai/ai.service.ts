@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import {OpenAI } from "openai";
+import { ChatgptService } from "src/customService/chatgpt.service";
 import { AppDataSource } from "src/customService/mysql.service";
 import { Brief } from "src/models/brief.model";
 import { Hook } from "src/models/hook.model";
@@ -17,7 +18,7 @@ export class AiService {
     private briefRepository:any
     private scenarioRepository:any
 
-    constructor(private configService: ConfigService, private settingsService:SettingsService) {
+    constructor(private configService: ConfigService, private settingsService:SettingsService, private chatgptService:ChatgptService) {
         this.initializeRepository()
     }
     private async initializeRepository(){
@@ -40,14 +41,11 @@ export class AiService {
                 Şirket veya kişi ismi: ${params.company_name}
                 Müşteri hizmet mi yoksa ürün mü satıyor?: ${params.product}
                 Çözüm getirilen sorun: ${params.product_description}
-                Somut ihtiyaç: ${params.concrete_need}
-                Soyut ihtiyaç: ${params.abstract_need}
                 Hizmet yada ürün özellikleri: ${params.product_properties}
                 Hizmet ya da ürün avantajları: ${params.product_advantages}
                 Vadedilen kazanımlar: ${params.gains}
                 Yönlendirme yapılacak yer: ${params.redirect}
                 Videoyu izleyenlerden beklenen davranış ve onları harekere geçirici söylem: ${params.behaviour}
-                Animasyonun süresi: ${params.animation_delay}
                 Yapılacak animasyon videosunun genel konu özeti: ${params.summary}
                 Hedef kitle: ${params.target_audience}
                 Hedef kitleye hitap dili: ${params.target_language}
@@ -80,19 +78,17 @@ export class AiService {
                 brief.company_name = params.company_name
                 brief.product = params.product
                 brief.product_description = params.product_description
-                brief.concrete_need = params.concrete_need
-                brief.abstract_need = params.abstract_need
                 brief.product_properties = params.product_properties
                 brief.product_advantage = params.product_advantage
                 brief.gains = params.gains
                 brief.redirect_url = params.redirect_url
                 brief.behaviour = params.behaviour
-                brief.animation_delay = params.animation_delay
                 brief.summary = params.summary
                 brief.target_group = params.target_group
                 brief.target_language = params.target_language
                 brief.company_sector = params.company_sector
                 brief.volume_type = params.volume_type
+                brief.text_lenght = params.text_lenght
                 brief.font = params.font
                 
                 
@@ -120,54 +116,28 @@ export class AiService {
         }
     }
 
-    async createScenario(params: any, custom_prompt:string): Promise<any> {
+    async createScenario(params: any): Promise<any> {
         const settings_data = await this.settingsService.get_custom_settings()
-        this.model = settings_data.openapi_model
-        this.openApiKey = settings_data.openai_api_key
-        
-        this.openai = new OpenAI({
-            apiKey: this.openApiKey,
-        });
         try{
-            const gptPrompt = `
-                Şirket veya kişi ismi: ${params.company_name}
-                Müşteri hizmet mi yoksa ürün mü satıyor?: ${params.product}
-                Çözüm getirilen sorun: ${params.product_description}
-                Somut ihtiyaç: ${params.concrete_need}
-                Soyut ihtiyaç: ${params.abstract_need}
-                Hizmet yada ürün özellikleri: ${params.product_properties}
-                Hizmet ya da ürün avantajları: ${params.product_advantages}
-                Vadedilen kazanımlar: ${params.gains}
-                Yönlendirme yapılacak yer: ${params.redirect}
-                Videoyu izleyenlerden beklenen davranış ve onları harekere geçirici söylem: ${params.behaviour}
-                Animasyonun süresi: ${params.animation_delay}
-                Yapılacak animasyon videosunun genel konu özeti: ${params.summary}
-                Hedef kitle: ${params.target_audience}
-                Hedef kitleye hitap dili: ${params.target_language}
-                Animasyon video yapılacak şirketin sektörü: ${params.company_sector}
-                Seslendirme türü: ${params.volume_type}
-                Metin yazı tonu: ${params.font}
-                ${custom_prompt}
+
+            const lenght = params.text_lenght.split('-')
+            const promp = `
+            animasyonlar için bir hikaye metni oluştur. Metin uzunluğu en az ${lenght[0]} en fazla ${lenght[1]} kelime olmalı. Kelime sayısına bağlı kal.
+            Gerekli bilgiler: "${JSON.stringify(params)}"            
+            Metin oluştururken bunlara dikkat et
+            1. Metinler ${params.hooks_centes} cümlesi ile başlamalı.
+            2. Metin sonunda ${params.redirect_url} ve ${params.company_name} cümlesi olmalı.
+            3. Sen dili ve siz diline dikkat ederek metin oluştur.
             `
-            const response = await this.openai.chat.completions.create(
-                {
-                    messages: [
-                        {
-                            role: 'user',
-                            content: gptPrompt
-                        }
-                    ],
-                    model: this.model,
-                    stop: ['\n'],
-                }
-            )
-            const text = response.choices[0].message.content
+            const response:any = await this.chatgptService.getResponse(promp, 5)
+
+            const text = response[0].message.content
             const scenario = new Scenario()
             scenario.text = text.replace('"', '').replace('1.', '')
             scenario.brief = params.id
             await this.scenarioRepository.save(scenario)
             
-            return response.choices
+            return response
         }catch(err){
             console.log(err)
         }
