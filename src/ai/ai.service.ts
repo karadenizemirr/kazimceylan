@@ -119,24 +119,44 @@ export class AiService {
     async createScenario(params: any): Promise<any> {
         const settings_data = await this.settingsService.get_custom_settings()
         try{
-
             const lenght = params.text_lenght.split('-')
-            const promp = `
-            animasyonlar için bir hikaye metni oluştur. Metin uzunluğu en az ${lenght[0]} en fazla ${lenght[1]} kelime olmalı. Kelime sayısına bağlı kal.
-            Gerekli bilgiler: "${JSON.stringify(params)}"            
-            Metin oluştururken bunlara dikkat et
-            1. Metinler ${params.hooks_centes} cümlesi ile başlamalı.
-            2. Metin sonunda ${params.redirect_url} ve ${params.company_name} cümlesi olmalı.
-            3. Sen dili ve siz diline dikkat ederek metin oluştur.
-            `
-            const response:any = await this.chatgptService.getResponse(promp, 5)
+            
+            const message = [
+                {role: 'user', content: 'Öncelikle biz 2D video animasyonlar hazırlayan bir şirketiz.Kullanıcılardan aldığımız bilgiler doğrultusunda 2D animasyonlar hazırlıyoruz.'},
+                {role: 'user', content: 'Bu animasyonları hazırlarken senaryo metinlerine ihtiyaç duyuyoruz. Seninle birlikte senaryo metinleri oluşturacağız.'},
+                {role: 'user', content: 'Şimdi seninle metinleri oluştururken belirli kurallara göre oluşturmanı istiyorum bu kuralları seninle paylaşacağım'},
+                {role: 'user' ,content: `Metin uzunluğu en az${lenght[0]} kelime ile ${lenght[1]} kelime arasında olmalıdır.`},
+                {role: 'user', content: `Metinin giriş cümlesi ${params.hook_centes} olmalıdır. Bu cümleyi daha duygusal bir biçimde yazabilirsin.`},
+                {role: 'user', content: 'Şirketin ismi: ' + params.company_name},
+                {role: 'user', content: 'Şirketin Ürettiği Ürünler: ' + params.product},
+                {role: 'user', content: 'Şirketin ürününün açıklması: ' + params.product_description},
+                {role: 'user', content: 'Ürünün sağladığı avantajlar: ' + params.product_advantage},
+                {role: 'user', content: 'Ürünün özellikleri: ' + params.product_properties},
+                {role: 'user', content: 'Yönlendirilecek yer: ' + params.redirect_url},
+                {role: 'user', content: 'Hedef kitle: ' + params.target_group},
+                {role: 'user', content: 'Videoyu izleyeceklerden beklenen davranış: ' + params.behaviour},
+                {role: 'user', content: 'Animasyonun genel konu özeti: ' + params.summary},
+                {role: 'user', content: 'Hedef kitle: ' + params.target_group},
+                {role: 'user', content: 'Şirketin sektörü: ' + params.company_sector},
+                {role: 'user', content: 'Hitap dili: ' + params.target_language},
+                {role: 'user', content: 'Seslendirme türü: ' + params.volume_type},
+                {role: 'user', content: 'Metin yazı tonu: ' + params.font},
+                {role: 'user', content:'Metin yazı tonuna göre duygusallaştırmayı yap.'},
+                {role: 'user', content: 'Metin içerisindeki isimler türkçe olsun'},
+                {role: 'user', content: 'Metin yazı tonu: Animasyon seslendirmesi yazılırken yazılan metnin hangi tonda olması gerektiğini seçtiğimiz alan burasıdır. Eğer bu kısımda “klasik ton” girdisi yapılırsa senden istediğimiz yazım dili, animasyon videoyu izleyen kişiler açısından daha kurumsal, daha resmi bir dil olacaktır. Eğer “kreatif” girdisi yapılırsa senden istediğimiz yazım dili, animasyon videoyu izleyen kişiler açısından daha hikaye odaklı daha öngörülmedik ve yer yer sempatik olmak amaçlı espri içeren bir tarzda olmalıdır. Eğer bu kısımda “agresif” girdisi yapılırsa senden istediğimiz yazım dili, animasyon videoyu izleyen kişileri doğrudan satın almaya yönlendirecek bir tarzda olmalıdır. Şimdi sana tek bir örnek animasyon seslendirmesinin yazım tonları açısından nasıl farklılık gösterdiğini örnekleyerek gösterelim. Konu: Anneler günü için özel bir indirim yapan Hedef Alışveriş Merkezleri’nin %50’lik kampanyası. Klasik tonda örnek: “Anneler gününe özel yapmış olduğumuz indirimle, tüm annelerimizin gününü kutlamak istedik.” Kreatif tonda örnek: “Ahmet, bir müzik öğretmeni ve son derece şanslı biri. Neden dediğiniz duyar gibiyim. Buyrun anlatalım öyleyse. Ahmet, ilk önce bir tren kazası geçirdi ve trenden tek kurtulan kişi o oldu. Daha sonra bir araba kazası geçirdi ve taklalar atarak arabadan uçsa da yine kurtuldu. Bindiği uçak bermuda şeytan üçgeninin üstünden geçerken bilinmeyen mistik sebeplerle ıssız bir adaya düştü ve hurdaya dönmüş uçağın içinden sağ kurtuldu. Bununla da kalmayan Ahmet, ikinci el dükkanından satın aldığı pantolonun cebinden bir piyango buldu ve bu piyangodan yaklaşık bir milyon dolar kazandı. En sonunda kendisiyle yapılan bir röportajda hayatında yaşadığı tüm bu esrarengiz kurtuluşu ve kazanımlarına rağmen hayattaki en büyük şansının annesi olduğunu söyledi. Sizin de Ahmet gibi düşündüğünüzü biliyoruz. Bu yüzden, Tüm annelerin anneler günü hem kutlu, hem mutlu olsun diye Hedef Alışveriş Merkezleri olarak tüm ürünlerde geçerli %50 indirimimizi duyurmak istedik” Agresif tonda örnek: “Bu indirim kaçmaz! Anneler gününe özel tüm ürünlerde tam %50 indirim yaptık. Tüm ürünlerde geçerli bu indirimden sınırlı süre olan 14 mayısa kadar yararlanabilirsiniz. Bu fırsatı kaçırmamak için acele edin!”'},
+                {role: 'user', content: `Metin uzunluğunu en az ${lenght[0]} kelime ile ${lenght[1]} kelime arasında yaz. Bana bu bilgiler doğrultusun senaryp metini ver. Bu kelime sınırını aşmamaya çalış.`},
+                {role: 'user', content: 'Metin içerisinde giriş, anahtar mesaj gibi başlıklar kullanma. Saf metin istiyorum.'},
+                {role:'user', content: 'Metinleri yönlendirilecek yeri, şirket ismini ve kelime sayısını yaz.'},
+                {role: 'user', content: 'Metinleri düzenli bir html dosyası olarak hazırla. Yazılar iç içe olmasın, başlıklar kalın olarak yazılsın. Özellikle kelime sayısı bold olsun.'},
+                {role: 'user', content: 'Bu bilgiler ışığında bana animasyon senaryosu yazmanı istiyorum. Hedef kiteleye uygun olarak metini hazırla.'},
+            ]
 
+            const response = await this.chatgptService.getResponse(message, 1)
             const text = response[0].message.content
             const scenario = new Scenario()
             scenario.text = text.replace('"', '').replace('1.', '')
             scenario.brief = params.id
             await this.scenarioRepository.save(scenario)
-            
             return response
         }catch(err){
             console.log(err)

@@ -16,7 +16,7 @@ export class ChatgptService {
 
     }
 
-    async getResponse(prompt:string,n:number){
+    async getResponse(prompt:any,n:number){
         const settings_data = await this.settingsService.get_custom_settings()
         this.model = settings_data.openapi_model
         this.openApiKey = settings_data.openai_api_key
@@ -27,16 +27,14 @@ export class ChatgptService {
     
         const response = await this.openai.chat.completions.create(
             {
-                messages: [{
-                    role: 'user',
-                    content: prompt,
-                }],
+                messages: prompt,
                 model: this.model,
-                stop : ['\n'],
+                n:n
             }
         )
 
         return response.choices
     }
 
+    
 }

@@ -178,7 +178,7 @@
 <!-- Modal -->
 <div class="modal fade" id="scenario_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen-lg-down" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content text-center">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Oluşturulan Senaryo</h5>
@@ -186,7 +186,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="scenario_content">
+            <div class="modal-body text-center" id="scenario_content">
             </div>
             <div class="modal-footer">
                 <p class="text-danger text-sm">
@@ -196,6 +196,9 @@
         </div>
     </div>
 </div>
+
+
+
 <script>
     $(document).ready(function () {
         $("#scenario_form").submit(function (e) {
@@ -253,7 +256,7 @@
                     success: function (response) {
                         $('#scenario_modal').modal('show')
                         $('#create_centence_modal').modal('hide')
-                        var p = $('<p>').text(response[0].message.content)
+                        var p = $('<p>').html(response[0].message.content)
                         $('#scenario_content').append(p)
                     },
                     complete: function () {

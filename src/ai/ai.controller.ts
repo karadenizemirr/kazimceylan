@@ -34,11 +34,8 @@ export class AiController {
     @Post('create')
     async create_breifs(@Body() data:any, @Res() res:Response){
 
-        const custom_prompt = `Verdiğim bu bilgilere göre bir seslendirme metni yazmanı istiyorum.Herhangi bir kurgu ya da storyline istemiyorum.
-        Her animasyon seslendirme metninin başında, animasyon videonun sonuna kadar 
-        izletebilmesi ve dikkatleri çekebilmesi için dikkat çekici bir cümle kurulması gerekmektedir. Ortalama ilk 10-15 kelime dikkatleri çekebileceğimiz en önemli kelimelerdir.
-        Seslendirme metinleri resmi, espirili, kreatif olacak. Bunu yukarıda verdiğim metin yazı tonu kısmında belirttim. Senden istediğim 
-        birbirinden farklı 5 adet maksimum 15 kelimelik seslendirme cümleleri oluşturman. Başka bir metin uzunluğu burada kabul etme.`
+        const custom_prompt = `${data.company_name} adında bir şirketiz. ${data.product} ürünleri üretiyoruz. ${data.product_description}.Öncellikle bana 
+        sunduğumuz hizmetle ilgili tek cümlelik 5 adet pazarlama kancası yazmanı istiyorum. Bu cümleleri insanların duygularına hitap edecek şekilde yazmalısın.`
 
         const result = await this.aiService.createHooks(data, custom_prompt)
         if (result){
