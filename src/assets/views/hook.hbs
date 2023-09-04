@@ -6,6 +6,11 @@
         Cümleler
       </h2>
     </div>
+    <div class="topbar mt-3 mb-3">
+      <a id="delete_all_centences" class="btn btn-outline-danger btn-sm">
+        <i class="fas fa-trash"></i>Tümünü Sil
+      </a>
+    </div>
     <table class="table">
       <thead class="text-center">
         <tr>
@@ -17,13 +22,13 @@
       </thead>
       <tbody class="text-center">
         {{#each hooks}}
-                <tr>
+        <tr>
           <th scope="row">{{this.id}}</th>
           <td>
             {{this.text}}
           </td>
           <td>
-            {{this.brief.company_name}}
+            <a href="/scenario/{{this.brief.id}}" class="text-primary">{{this.brief.company_name}}</a>
           </td>
           <td>
             <a href="/scenario/hooks/delete/{{this.id}}" class="btn btn-danger btn-sm">Sil</a>
@@ -34,3 +39,44 @@
     </table>
   </div>
 </section>
+
+<script>
+  $(document).ready(function () {
+    $("#delete_all_centences").click(function () {
+      Swal.fire({
+        title: 'Tüm Cümleleri Sil',
+        text: "Tüm cümleleri silmek istediğinize emin misiniz?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Evet',
+        cancelButtonText: 'Hayır'
+      }).then((result) => {
+        $.ajax({
+          url: '/scenario/hooks/delete/all',
+          type: 'GET',
+          success: function (response) {
+            if (response === 200) {
+              Swal.fire({
+                title: 'Cümleleri Sil',
+                text: 'Tüm cümleler silindi.',
+                icon: 'success',
+                confirmButtonText: 'Tamam'
+              }).then((result) => {
+                window.location.reload()
+              })
+            }else {
+              Swal.fire({
+                title:'Cümleleri Sil',
+                text: 'Tüm cümleler silinemedi.',
+                icon: 'error',
+                confirmButtonText: 'Tamam'
+              }).then((result) => {
+                window.location.reload()
+              })
+            }
+          }
+        })
+      })
+    })
+  })
+</script>

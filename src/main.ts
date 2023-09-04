@@ -28,7 +28,7 @@ async function bootstrap() {
 
   Handlebars.registerHelper('text_resize', function(text:string){
     if (text.length > 120){
-      return text.slice(0,120) + '...'
+      return text.slice(0,120).replace(/<\/?[^>]+(>|$)/g, "") + '...'
     }
     return text
   })

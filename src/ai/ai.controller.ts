@@ -89,6 +89,16 @@ export class AiController {
             res.redirect(302, '/scenario/hooks')
         }
     }
+
+    @Get('hooks/delete/all')
+    async delete_all_hooks(@Res() res:Response){
+        const result = await this.aiService.delete_all_hooks()
+        if (result){
+            return res.send(200)
+        }
+
+        return res.send(400)
+    }
     
     // --------------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------------
@@ -119,5 +129,15 @@ export class AiController {
         if (result){
             res.redirect(302, '/scenario/all')
         }
+    }
+
+    @Get('delete/all')
+    async delete_all_scenario(@Res() res:Response){
+        const result = await this.aiService.delete_all_scenario()
+        if (result){
+            return res.send(200)
+        }
+
+        return res.send(400)
     }
 }

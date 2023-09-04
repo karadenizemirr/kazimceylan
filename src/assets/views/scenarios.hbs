@@ -6,22 +6,33 @@
         Senaryolar
       </h2>
     </div>
+    <div class="topbar mt-3 mb-3">
+      <a id="delete_all_scenario" class="btn btn-outline-danger btn-sm">
+        <i class="fas fa-trash"></i>Tümünü Sil
+      </a>
+    </div>
     <table class="table">
       <thead class="text-center">
         <tr>
           <th scope="col">Cümle</th>
           <th scope="col">Şirket İsmi</th>
+          <th scope="col">Sil</th>
         </tr>
       </thead>
       <tbody class="text-center">
         {{#each scenarios}}
-                <tr>
+        <tr>
           <td>
-              <a href="#" class="scenario-link">{{text_resize this.text}}</a>
-              <input type="text" hidden id="scenario_detai" value="{{this.text}}">
+            <a href="#" class="scenario-link">{{{text_resize this.text}}}</a>
+            <input type="text" hidden id="scenario_detai" value="{{this.text}}">
           </td>
           <td>
             <a href="/scenario/{{this.brief.id}}" class="text-primary">{{this.brief.company_name}}</a>
+          </td>
+          <td>
+            <a href="/scenario/delete/{{this.id}}" class="btn btn-outline-danger btn-sm">
+              <i class="fas fa-trash"></i>
+            </a>
           </td>
         </tr>
         {{/each}}
@@ -32,7 +43,7 @@
 
 <!-- Modal -->
 <div class="modal" id="scenarioModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Scenario Details</h5>
@@ -40,19 +51,53 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-center">
         <p></p>
       </div>
     </div>
   </div>
 </div>
 <script>
-  $(document).ready(function(){
-    $('.scenario-link').on('click', function(e) {
+  $(document).ready(function () {
+    $('.scenario-link').on('click', function (e) {
       e.preventDefault();
       var text = $(this).next('#scenario_detai').val();
-      $('#scenarioModal .modal-body p').text(text);
+      $('#scenarioModal .modal-body').html(text);
       $('#scenarioModal').modal('show');
     });
+
+    $('#delete_all_scenario').click(function(){
+      Swal.fire({
+        title: 'Tümünü Sil',
+        text: "Tüm senaryoları silmek istediğinize emin misiniz?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Evet',
+        cancelButtonText: 'Hayır'
+      }).then((result) => {
+        $.ajax({
+          url: '/scenario/delete/all',
+          type: 'GET',
+          success: function(response){
+            if (response === 200){
+              Swal.fire({
+                title: 'Silme İşlemi',
+                text: 'Tüm senaryolar başarı ile silindi',
+                icon: 'success',
+                confirmButtonText: 'Tamam'
+              }).then((result) => {
+                window.location.reload();
+              })
+            }else {
+              Swal.fire({
+                title: 'Silme İşlemi',
+                text: 'Tüm senaryolar silinemedi',
+                icon: 'error',
+              })
+            }
+          }
+        })
+      })
+    })
   })
 </script>

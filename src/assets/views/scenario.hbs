@@ -72,19 +72,23 @@
                         <div class="col mb-3">
                             <select name="target_language" id="" class="form-select">
                                 <option>Hikaye Hitap Dili</option>
-                                <option value="sen dili" {{selectOption briefs.target_language 'sen dili'}} >Sen Dili</option>
-                                <option value="siz dili" {{selectOption briefs.target_language 'siz dili'}} >Siz Dili</option>
+                                <option value="sen dili" {{selectOption briefs.target_language 'sen dili' }}>Sen Dili
+                                </option>
+                                <option value="siz dili" {{selectOption briefs.target_language 'siz dili' }}>Siz Dili
+                                </option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <select class="form-select" aria-label="Default select example" name="text_lenght" >
+                            <select class="form-select" aria-label="Default select example" name="text_lenght">
                                 <option>Oluşturulacak Metnin Kelime Sayısı</option>
-                                <option value="55-60" {{selectOption briefs.text_lenght '55-60'}}> 55 -60</option>
-                                <option value="85-90" {{selectOption briefs.text_lenght '85-90'}} >85- 90</option>
-                                <option value="110-115" {{selectOption briefs.text_lenght '110-115'}} >110 - 115</option>
-                                <option value="170-175" {{selectOption briefs.text_lenght '170-175'}} >170 - 175</option>
+                                <option value="55-60" {{selectOption briefs.text_lenght '55-60' }}> 55 -60</option>
+                                <option value="85-90" {{selectOption briefs.text_lenght '85-90' }}>85- 90</option>
+                                <option value="110-115" {{selectOption briefs.text_lenght '110-115' }}>110 - 115
+                                </option>
+                                <option value="170-175" {{selectOption briefs.text_lenght '170-175' }}>170 - 175
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -92,17 +96,20 @@
                         <div class="col mb-3">
                             <select name="volume_type" id="" class="form-select">
                                 <option>Seslendirme Türü</option>
-                                <option value="doğrudan anlatım" {{selectOption briefs.volume_type 'doğrudan anlatım'}} >Doğrudan Anlatım</option>
-                                <option value="hikaye anlatıcılığı" {{selectOption briefs.volume_type 'hikaye anlatıcılığı'}} >Hikaye Anlatıcılığı</option>
+                                <option value="doğrudan anlatım" {{selectOption briefs.volume_type 'doğrudan anlatım'
+                                    }}>Doğrudan Anlatım</option>
+                                <option value="hikaye anlatıcılığı" {{selectOption
+                                    briefs.volume_type 'hikaye anlatıcılığı' }}>Hikaye Anlatıcılığı</option>
                             </select>
 
                         </div>
                         <div class="col mb-3">
                             <select name="font" id="" class="form-select">
                                 <option>Metin Yazı Tonu</option>
-                                <option value="kreatif" {{selectOption briefs.font 'kreatif'}} >Kreatif</option>
-                                <option value="klasik ton" {{selectOption briefs.font 'klasik ton'}} >Klasik Ton</option>
-                                <option value="agresif" {{selectOption briefs.font 'agresif'}} >Agresif</option>
+                                <option value="kreatif" {{selectOption briefs.font 'kreatif' }}>Kreatif</option>
+                                <option value="klasik ton" {{selectOption briefs.font 'klasik ton' }}>Klasik Ton
+                                </option>
+                                <option value="agresif" {{selectOption briefs.font 'agresif' }}>Agresif</option>
                             </select>
                         </div>
                     </div>
@@ -161,7 +168,8 @@
         <div class="modal-content text-center">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Kanca Cümleyi Girin</h5>
-                <button type="button" class="close" data-bs-dismiss="create_centence_modal" aria-label="Close" id="close_create_centence_modal">
+                <button type="button" class="close" data-bs-dismiss="create_centence_modal" aria-label="Close"
+                    id="close_create_centence_modal">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -214,7 +222,7 @@
                 data: $(this).serialize(),
                 success: function (response) {
                     for (const data of response) {
-                        var liElement = $('<li>').text(data.message.content)
+                        var liElement = $('<li>').text(data.message.content.replace('1', '').replace('.', '').replace('"', ''))
                         $('#keyword_list').append(liElement)
                         $('#result_modal').modal('show')
                         $('#scenario_form').trigger("reset");
@@ -271,11 +279,14 @@
     $('#close_modal').click(function () {
         $('#keyword_list').empty()
         $('#result_modal').modal('hide')
+        window.location.reload()
     })
     $('#close_create_centence_modal').click(function () {
         $('#create_centence_modal').modal('hide')
+        window.location.reload()
     })
     $('#close_scenario_button').click(function () {
         $('#scenario_modal').modal('hide')
+        window.location.reload()
     })
 </script>

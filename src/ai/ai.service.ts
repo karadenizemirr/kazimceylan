@@ -144,11 +144,13 @@ export class AiService {
                 {role: 'user', content:'Metin yazı tonuna göre duygusallaştırmayı yap.'},
                 {role: 'user', content: 'Metin içerisindeki isimler türkçe olsun'},
                 {role: 'user', content: 'Metin yazı tonu: Animasyon seslendirmesi yazılırken yazılan metnin hangi tonda olması gerektiğini seçtiğimiz alan burasıdır. Eğer bu kısımda “klasik ton” girdisi yapılırsa senden istediğimiz yazım dili, animasyon videoyu izleyen kişiler açısından daha kurumsal, daha resmi bir dil olacaktır. Eğer “kreatif” girdisi yapılırsa senden istediğimiz yazım dili, animasyon videoyu izleyen kişiler açısından daha hikaye odaklı daha öngörülmedik ve yer yer sempatik olmak amaçlı espri içeren bir tarzda olmalıdır. Eğer bu kısımda “agresif” girdisi yapılırsa senden istediğimiz yazım dili, animasyon videoyu izleyen kişileri doğrudan satın almaya yönlendirecek bir tarzda olmalıdır. Şimdi sana tek bir örnek animasyon seslendirmesinin yazım tonları açısından nasıl farklılık gösterdiğini örnekleyerek gösterelim. Konu: Anneler günü için özel bir indirim yapan Hedef Alışveriş Merkezleri’nin %50’lik kampanyası. Klasik tonda örnek: “Anneler gününe özel yapmış olduğumuz indirimle, tüm annelerimizin gününü kutlamak istedik.” Kreatif tonda örnek: “Ahmet, bir müzik öğretmeni ve son derece şanslı biri. Neden dediğiniz duyar gibiyim. Buyrun anlatalım öyleyse. Ahmet, ilk önce bir tren kazası geçirdi ve trenden tek kurtulan kişi o oldu. Daha sonra bir araba kazası geçirdi ve taklalar atarak arabadan uçsa da yine kurtuldu. Bindiği uçak bermuda şeytan üçgeninin üstünden geçerken bilinmeyen mistik sebeplerle ıssız bir adaya düştü ve hurdaya dönmüş uçağın içinden sağ kurtuldu. Bununla da kalmayan Ahmet, ikinci el dükkanından satın aldığı pantolonun cebinden bir piyango buldu ve bu piyangodan yaklaşık bir milyon dolar kazandı. En sonunda kendisiyle yapılan bir röportajda hayatında yaşadığı tüm bu esrarengiz kurtuluşu ve kazanımlarına rağmen hayattaki en büyük şansının annesi olduğunu söyledi. Sizin de Ahmet gibi düşündüğünüzü biliyoruz. Bu yüzden, Tüm annelerin anneler günü hem kutlu, hem mutlu olsun diye Hedef Alışveriş Merkezleri olarak tüm ürünlerde geçerli %50 indirimimizi duyurmak istedik” Agresif tonda örnek: “Bu indirim kaçmaz! Anneler gününe özel tüm ürünlerde tam %50 indirim yaptık. Tüm ürünlerde geçerli bu indirimden sınırlı süre olan 14 mayısa kadar yararlanabilirsiniz. Bu fırsatı kaçırmamak için acele edin!”'},
-                {role: 'user', content: `Metin uzunluğunu en az ${lenght[0]} kelime ile ${lenght[1]} kelime arasında yaz. Bana bu bilgiler doğrultusun senaryp metini ver. Bu kelime sınırını aşmamaya çalış.`},
-                {role: 'user', content: 'Metin içerisinde giriş, anahtar mesaj gibi başlıklar kullanma. Saf metin istiyorum.'},
-                {role:'user', content: 'Metinleri yönlendirilecek yeri, şirket ismini ve kelime sayısını yaz.'},
-                {role: 'user', content: 'Metinleri düzenli bir html dosyası olarak hazırla. Yazılar iç içe olmasın, başlıklar kalın olarak yazılsın. Özellikle kelime sayısı bold olsun.'},
+                {role: 'user', content: `Metin uzunluğunu en az ${lenght[0]} kelime ile ${lenght[1]} kelime arasında yaz. Bana bu bilgiler doğrultusun senaryo metini ver. Aldığın bilgileri direkt olarak kullanma bu bilgileri senaryo içerisine uygun biçimde dağıtarak kullan. Bu kelime sınırını aşmamaya çalış.`},
+                {role: 'user',  content: 'Metinleri yönlendirilecek yeri, şirket ismini ve kelime sayısını yaz.'},
                 {role: 'user', content: 'Bu bilgiler ışığında bana animasyon senaryosu yazmanı istiyorum. Hedef kiteleye uygun olarak metini hazırla.'},
+                {role: 'user', content: 'Bu metini bir modal içerisinde göstereceğim. Buna göre h3 li ve p taglarını kullanarak metini görüntülenmeye hazırla. Bu etiketler toLowerCase olsun. Bu tagları metine ekle'},
+                {role: 'user' ,content: 'Websitesi, telefon numarası, adres gibi bilgiler varsa metin sonuna ekle yoksa ekleme. Metinde en son yazılacak şey şirket ismi olmalı. Oluşturduğun kelime sayısını da metin sonuna yaz.'},
+                {role: 'user', content: `Metin uzunluğunu en az ${lenght[0]} kelime ile ${lenght[1]} kelime arasında düzenle.`},
+
             ]
 
             const response = await this.chatgptService.getResponse(message, 1)
@@ -271,6 +273,22 @@ export class AiService {
         }
     }
 
+    async delete_all_hooks(){
+        try{
+            const hooks = await this.hookRepository.find()
+            if (hooks){
+                await this.hookRepository.delete({})
+                return {
+                    message: 'Hooks deleted'
+                }
+            }
+            throw new HttpException('Hook not found', HttpStatus.NOT_FOUND)
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+
     async get_scenarios(){
         try{
 
@@ -305,6 +323,22 @@ export class AiService {
                 await this.scenarioRepository.delete(id)
                 return {
                     message: 'Scenario deleted'
+                }
+            }
+            throw new HttpException('Scenario not found', HttpStatus.NOT_FOUND)
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    async delete_all_scenario(){
+        try{
+            const scenarios = await this.scenarioRepository.find()
+            if (scenarios){
+                await this.scenarioRepository.delete({})
+                return {
+                    message: 'Scenarios deleted'
                 }
             }
             throw new HttpException('Scenario not found', HttpStatus.NOT_FOUND)
