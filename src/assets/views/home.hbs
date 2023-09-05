@@ -1,12 +1,36 @@
-<!--====== Hero Section Start ======-->
-<section class="hero-section-two bgs-cover rel z-2 pt-205 pb-250 rpt-150 rpb-50"
-    style="background-image: url(/public/images/banner.jpg); hight: 100vh !important;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-9">
-                <div class="hero-content-two text-center text-white rpt-20">
-                    <span class="sub-title wow fadeInUp delay-0-2s">Vidyoner</span>
-                    <h1 class="mb-15 wow fadeInUp delay-0-4s">Senaryolarınızı Kolayca Oluşturun</h1>
+<style>
+    .bg {
+        position: absolute;
+        top: 9.7%;
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        opacity: .8;
+    }
+
+    .carousel-caption {
+        position: absolute;
+        top: 40%;
+        text-align: center;
+    }
+</style>
+<section class="fullscreen-carousel">
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+            <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+        </ol>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <div class="bg"></div>
+            <div class="carousel-item active">
+                <video src="/public/video/2.mp4" autoplay loop muted></video>
+                <div class="carousel-caption text-white">
+                    <h1 class="mb-15 wow fadeInUp delay-0-4s w-100">Senaryolarınızı Kolayca Oluşturun.</h1>
                     <div class="hero-btns mt-40 wow fadeInUp delay-0-8s">
                         {{#if isLogin}}
                         <a href="/scenario" class="theme-btn style-four">Senaryo Oluştur <i
@@ -15,18 +39,19 @@
                         <a href="/user/login" class="theme-btn style-four">Giriş Yap <i
                                 class="fas fa-arrow-right"></i></a>
                         {{/if}}
-                        <a href="/" class="theme-btn style-five">Geliştiriciye Ulaş <i
-                                class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
     </div>
-    <div class="section-alpha-text mb-250">Saaslanding</div>
-    <img class="dots-shape" src="/public/images/shapes/white-dots.png" alt="Shape">
-    <img class="tringle-shape" src="/public/images/shapes/white-tringle.png" alt="Shape">
-    <img class="close-shape" src="/public/images/shapes/white-close.png" alt="Shape">
-    <div class="left-circles"></div>
-    <div class="right-circles"></div>
 </section>
-<!--====== Hero Section End ======-->

@@ -39,8 +39,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
     <!--====== Responsive css ======-->
     <link rel="stylesheet" href="/public/css/responsive.css">
-    <!--====== Jquery ======-->
     <script src="/public/js/jquery-3.6.0.min.js"></script>
+
+
+    <!-- Flickity JS -->
+
 
 </head>
 
@@ -78,9 +81,9 @@
                                         {{#if isLogin}}
                                         <li class="dropdown"><a href="#">Senaryo İşlemleri</a>
                                             <ul>
-                                                <li><a href="/scenario/briefs">Briefs</a></li>
-                                                <li><a href="/scenario/hooks">Cümleler</a></li>
-                                                <li><a href="/scenario/all">Senaryolar</a></li>
+                                                <li><a href="/scenario/briefs">Kayıtlı Girdiler</a></li>
+                                                <li><a href="/scenario/hooks">Kanca Cümleler</a></li>
+                                                <li><a href="/scenario/all">Kayıtlı Senaryolar</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown"><a href="#">Ayarlar</a>
@@ -89,7 +92,6 @@
                                             </ul>
                                         </li>
                                         {{/if}}
-                                        <li><a href="/">Geliştiriciye Ulaş</a></li>
                                     </ul>
                                 </div>
 
@@ -97,7 +99,7 @@
                             <!-- Main Menu End-->
                         </div>
 
-                        <div class="logo-outer mx-lg-auto ">
+                        <div class="logo-outer mx-lg-auto">
                             <div class="logo"><a href="/">
                                     <img src="/public/images/logo.png" alt="Logo" style="max-width: 200px;">
                                 </a></div>
@@ -132,8 +134,7 @@
         <footer class="footer-section rel z-1">
             <div class="container">
                 <div class="copyright-area text-center">
-                    <p>© 2023 <a href="/">Kazım CEYLAN.</a> Tüm hakları saklıdır. @karadenizemirr Tarafından
-                        Geliştirilmiştir.</p>
+                    <p>© 2023 <a href="/">Vidyoner 2D Animasyon Ajansı.</a> Tüm hakları saklıdır.</p>
                 </div>
             </div>
             <img class="dots-shape" src="/public/images/shapes/dots.png" alt="Shape">
@@ -175,6 +176,7 @@
     <script src="/public/js/script.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+
 </body>
 
 </html>

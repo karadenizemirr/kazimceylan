@@ -8,7 +8,7 @@
     z-index: 999;
     width: 100%;
     -webkit-transition: all 500ms ease;
-    transition: all 500ms ease;
+    transition: all 1ms ease;
 }
 
 .header-top p {
@@ -40,7 +40,7 @@
     left: 0;
     top: 0;
     -webkit-transition: all 500ms ease;
-    transition: all 500ms ease;
+    transition: all 1ms ease;
 }
 
 .fixed-header .header-upper {
@@ -97,7 +97,7 @@
     opacity: 1;
     font-weight: 600;
     text-transform: capitalize;
-    transition: all 500ms ease;
+    transition: all 1ms ease;
 }
 
 .main-menu .navigation > li > a {

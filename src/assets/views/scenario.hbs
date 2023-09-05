@@ -221,12 +221,15 @@
                 type: "POST",
                 data: $(this).serialize(),
                 success: function (response) {
-                    for (const data of response) {
+                    console.log(response)
+                    for (const data of response.data) {
                         var liElement = $('<li>').text(data.message.content.replace('1', '').replace('.', '').replace('"', ''))
                         $('#keyword_list').append(liElement)
                         $('#result_modal').modal('show')
                         $('#scenario_form').trigger("reset");
                     }
+                    var footer = $('.modal-footer').append(`<a href="/scenario/${response.id}" class="btn btn-primary btn-sm" id="send_scenario_button">Girdiye Git</a>`)
+
                 },
                 complete: function () {
                     button.html('Gönder');

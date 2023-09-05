@@ -108,7 +108,7 @@ export class AiService {
                     hooks.push(hook)
                     await this.hookRepository.save(hook)
                 }
-                return response.choices
+                return {data:response.choices, id:brief.id}
             }
             
         }catch(err){
@@ -148,7 +148,7 @@ export class AiService {
                 {role: 'user',  content: 'Metinleri yönlendirilecek yeri, şirket ismini ve kelime sayısını yaz.'},
                 {role: 'user', content: 'Bu bilgiler ışığında bana animasyon senaryosu yazmanı istiyorum. Hedef kiteleye uygun olarak metini hazırla.'},
                 {role: 'user', content: 'Bu metini bir modal içerisinde göstereceğim. Buna göre h3 li ve p taglarını kullanarak metini görüntülenmeye hazırla. Bu etiketler toLowerCase olsun. Bu tagları metine ekle'},
-                {role: 'user' ,content: 'Websitesi, telefon numarası, adres gibi bilgiler varsa metin sonuna ekle yoksa ekleme. Metinde en son yazılacak şey şirket ismi olmalı. Oluşturduğun kelime sayısını da metin sonuna yaz.'},
+                {role: 'user' ,content: 'Websitesi, telefon numarası, adres gibi bilgiler varsa metin sonuna ekle yoksa ekleme. Telefon numarasını rastgele oluşturma. Metinde en son yazılacak şey şirket ismi olmalı. Oluşturduğun kelime sayısını da metin sonuna yaz.'},
                 {role: 'user', content: `Metin uzunluğunu en az ${lenght[0]} kelime ile ${lenght[1]} kelime arasında düzenle.`},
 
             ]
